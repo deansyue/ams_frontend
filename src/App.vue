@@ -1,3 +1,10 @@
+<script>
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
+export default {
+  name: 'App'
+}
+</script>
 <template>
   <nav>
     <router-link to="/">Home</router-link> |
