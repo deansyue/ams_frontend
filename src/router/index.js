@@ -1,7 +1,13 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import NotFund from '../views/NotFund.vue'
+import SignIn from '../views/SignIn.vue'
 
 const routes = [
+  {
+    path: '/',
+    name: 'sign-in',
+    component: SignIn
+  },
   {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
