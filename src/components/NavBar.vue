@@ -22,19 +22,31 @@
       <span class="mr-sm-2">帳號：{{account}}</span>
       <span class="mr-sm-2">使用者：{{name}}</span>
       <router-link class="mr-sm-2 text-muted" :to="'/changePassword'">修改密碼</router-link>
-      <router-link class="mr-sm-2 text-muted" :to="'/logOut'">登出</router-link>
+      <button class="mr-sm-2 text-muted" @click="logOut()">登出</button>
     </div>
   </div>
 </nav>
 </template>
 
 <script>
+import { Toast } from "../utils/helper"
 
 export default {
   data() {
     return {
       account: "",
       name: ""
+    }
+  },
+
+  methods: {
+    logOut() {
+      localStorage.clear()
+      Toast.fire({
+        icon: "success",
+        title: "登出成功"
+      })
+      this.$router.push('/')
     }
   },
 
