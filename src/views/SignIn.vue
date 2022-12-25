@@ -34,7 +34,7 @@
       </div>
 
       <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">
-        Submit
+        登入
       </button>
     </form>
   </div>
