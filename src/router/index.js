@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import NotFund from '../views/NotFund.vue'
 import SignIn from '../views/SignIn.vue'
 import HomePage from '../views/HomePage.vue'
+import CheckIn from '../views/CheckIn.vue'
 
 const routes = [
   {
@@ -11,8 +12,13 @@ const routes = [
   },
   {
     path: '/HomePage',
-    name: '/home-page',
+    name: 'home-page',
     component: HomePage
+  },
+  {
+    path: '/CheckIn',
+    name: 'check-in',
+    component: CheckIn
   },
   {
     path: '/:pathMatch(.*)*',
