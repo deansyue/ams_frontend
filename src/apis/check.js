@@ -3,6 +3,6 @@ const getToken = () => localStorage.getItem('token')
 
 export default {
   cehckInOnManual( checkTime ) {
-    return apiHelper.post('/checkin/0', { checkTime }, { headers: { Authorization: `Bearer ${getToken()}` } })
+    return apiHelper.post('/checkin', { checkTime }, { headers: { Authorization: `Bearer ${getToken()}` } })
   }
 }
