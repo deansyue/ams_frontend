@@ -1,6 +1,6 @@
 <template>
   <div class="container py-5">
-    <form class="w-100" @submit.prevent.stop="handleSubmit">
+    <form class="w-50 m-auto" @submit.prevent.stop="handleSubmit">
       <div class="text-center mb-4">
         <h1 class="h3 mb-3 font-weight-normal">出勤管理系統</h1>
         <h1 class="h3 mb-3 font-weight-normal">Sign In</h1>
@@ -33,9 +33,14 @@
         />
       </div>
 
-      <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">
+      <button class="btn btn-lg btn-primary btn-block mb-2 w-50 m-auto" type="submit">
         登入
       </button>
+      <router-link
+        class="btn-block mt-4 mr-auto ml-auto w-50 pl-4" style="font-size: 22px;"
+        :to="'/QRcodeGenerate'"
+        >產生打卡用二維條碼</router-link
+      >
     </form>
   </div>
 </template>
