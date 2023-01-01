@@ -4,6 +4,8 @@ import SignIn from '../views/SignIn.vue'
 import HomePage from '../views/HomePage.vue'
 import CheckIn from '../views/CheckIn.vue'
 import ChangePassword from '../views/ChangePassword.vue'
+import QRcodeGenerate from '../views/QRcodeGenerate.vue'
+import QRcodeReader from '../views/QRcodeReader.vue'
 
 const routes = [
   {
@@ -25,6 +27,16 @@ const routes = [
     path: '/changePassword',
     name: 'change-password',
     component: ChangePassword
+  },
+  {
+    path: '/QRcodeGenerate',
+    name: 'QRcode-generate',
+    component: QRcodeGenerate
+  },
+  {
+    path: '/QRcodeReader',
+    name: 'QRcode-reader',
+    component: QRcodeReader
   },
   {
     path: '/:pathMatch(.*)*',
