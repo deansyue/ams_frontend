@@ -133,8 +133,8 @@ export default {
               // 取得公司時區的當日日期,並將日期加密
               let datehash = this.$moment().tz(data.data.company.area).format('YYYY/MM/DD')
               datehash = bcrypt.hashSync(datehash, bcrypt.genSaltSync(10)) 
-              // 二維條碼value為qrcode打卡路由,給予使用者帳號及加密日期
-              this.value = `${baseURL}/qrcode/checkin?account=${this.user}&date=${datehash}`;
+              // 二維條碼value為qrcode打卡路由,給予使用者id及加密日期
+              this.value = `${baseURL}/qrcode/checkin?id=${data.data.user.id}&date=${datehash}`;
               this.generateAccount = this.user;
               this.user = "";
               return Toast.fire({
