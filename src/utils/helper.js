@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
-export const baseURL = 'http://localhost:3000/api'
+export const baseURL = 'https://stark-temple-81519.herokuapp.com/api'
 
 export const apiHelper = axios.create({
   baseURL
