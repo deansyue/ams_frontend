@@ -94,8 +94,8 @@
           </td>
           <td v-if="useGps">
             {{
-              checkRecordData.Attendance.offGps
-                ? checkRecordData.Attendance.offGps
+              checkRecordData.Attendances.offGps
+                ? checkRecordData.Attendances.offGps
                 : ""
             }}
           </td>
@@ -130,7 +130,7 @@ export default {
       endDate: "",
       timeZone: "",
       checkRecordDatas: [],
-      useGps: false,
+      useGps: true,
     };
   },
 
@@ -181,8 +181,8 @@ export default {
   },
 
   created() {
-    this.useGps =
-      JSON.parse(localStorage.getItem("currentUser")).Company.useGps || false;
+    // this.useGps =
+    //   JSON.parse(localStorage.getItem("currentUser")).Company.useGps || false;
     this.timeZone =
       JSON.parse(localStorage.getItem("currentUser")).Company.area ||
       "Asia/Taipei";
