@@ -19,8 +19,8 @@
     </ul>
 
     <div class="my-2 my-lg-0">
-      <span class="mr-sm-2">帳號：{{account}}</span>
-      <span class="mr-sm-2">使用者：{{name}}</span>
+      <span class="mr-sm-2">帳號：{{currentUser.account}}</span>
+      <span class="mr-sm-2">使用者：{{currentUser.name}}</span>
       <router-link class="mr-sm-2 text-muted" :to="'/changePassword'">修改密碼</router-link>
       <button class="mr-sm-2 text-muted" @click="logOut()">登出</button>
     </div>
@@ -30,15 +30,9 @@
 
 <script>
 import { Toast } from "../utils/helper"
+import { mapState } from "vuex"
 
 export default {
-  data() {
-    return {
-      account: "",
-      name: ""
-    }
-  },
-
   methods: {
     logOut() {
       localStorage.clear()
@@ -50,10 +44,8 @@ export default {
     }
   },
 
-created() {
-  const currentUser = JSON.parse(localStorage.getItem('currentUser'))
-  this.account = currentUser.account || ''
-  this.name = currentUser.name  || ''
-}
+  computed: {
+    ...mapState(['currentUser', 'isAuthenticatedUser'])
+  }
 }
 </script>

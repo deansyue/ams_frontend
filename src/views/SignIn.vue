@@ -87,7 +87,7 @@ export default {
           // 回傳status為success時
           this.isProcess = false
           localStorage.setItem('token', data.data.token)
-          localStorage.setItem('currentUser', JSON.stringify(data.data.user))
+          this.$store.commit('setCurrentUser', data.data.user)
           this.$router.push('/homePage')
         })
         .catch(error => {

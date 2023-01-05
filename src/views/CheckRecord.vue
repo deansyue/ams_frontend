@@ -114,6 +114,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex"
 import NavBar from "../components/NavBar.vue";
 import checkRecordAPI from "../apis/checkRecord";
 import { Toast } from "../utils/helper";
@@ -130,7 +131,7 @@ export default {
       endDate: "",
       timeZone: "",
       checkRecordDatas: [],
-      useGps: true,
+      useGps: "",
     };
   },
 
@@ -180,11 +181,15 @@ export default {
     },
   },
 
+  computed: {
+    ...mapState(['currentUser', 'isAuthenticatedUser'])
+  },
+
+  // 取vuex的company的資料進行數值初始化
   created() {
-    // this.useGps =
-    //   JSON.parse(localStorage.getItem("currentUser")).Company.useGps || false;
+    this.useGps = this.currentUser.Company.useGps || false;
     this.timeZone =
-      JSON.parse(localStorage.getItem("currentUser")).Company.area ||
+      this.currentUser.Company.area ||
       "Asia/Taipei";
 
     const timeZone = this.timeZone;

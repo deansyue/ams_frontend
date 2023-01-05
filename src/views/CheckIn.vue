@@ -7,8 +7,6 @@
       <div class="time mt-5 text-center">
         <h2>現在日期：{{ nowDate }}</h2>
         <h2>現在時間：{{ nowTime }}</h2>
-        <input type="checkbox" id="UseGps" name="UseGps" v-bind:checked="UseGps" @click="changeUseGps" style="display:none;">
-        <label for="UseGps" style="display:none;">使用gps驗證打卡</label>
         <button type="submit" class="btn btn-lg btn-info">打卡</button>
       </div>
       </form>
@@ -17,6 +15,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex"
 import NavBar from "../components/NavBar.vue";
 import checkAPI from "../apis/check";
 import { Toast } from "../utils/helper"
@@ -35,7 +34,7 @@ export default {
       nowDate: null,
       nowTime: null,
       timeZone: '',
-      UseGps: ''
+      useGps: ''
     }
   },
 
@@ -67,7 +66,7 @@ export default {
       let gps = ''
 
     // 判斷是否執行gps驗證
-    if (this.UseGps) {
+    if (this.useGps) {
 
       // 判斷當前瀏覽器是否支援geolocation
       if(!navigator.geolocation){  
@@ -80,7 +79,7 @@ export default {
         // gps驗證判斷
         return getPosition()
         .then(position => {
-          const userCompany = JSON.parse(localStorage.getItem('currentUser')).Company          
+          const userCompany = this.currentUser.Company          
           const currentLatitude = position.coords.latitude
           const currentLongitude = position.coords.longitude
 
@@ -147,12 +146,6 @@ export default {
             title: error.message
           })
         })
-      
-    },
-
-    // 點擊checkbox，變動UseGps值
-    changeUseGps() {
-      this.UseGps = !this.UseGps
     }
   },
 
@@ -160,11 +153,15 @@ export default {
     this.nowTimes()
   },
 
-  // 取localStorage的company，填入timeZone與UseGps
+  computed: {
+    ...mapState(['currentUser', 'isAuthenticatedUser'])
+  },
+
+  // 取vuex的company，填入timeZone與UseGps
   created() {
-  const userCompany = JSON.parse(localStorage.getItem('currentUser')).Company
+  const userCompany = this.currentUser.Company
   this.timeZone = userCompany.area || 'Asia/Taipei'
-  this.UseGps = userCompany.useGps || false
+  this.useGps = userCompany.useGps || false
   }
 };
 </script>
