@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import store from './../store'
 import NotFund from '../views/NotFund.vue'
 import SignIn from '../views/SignIn.vue'
 import HomePage from '../views/HomePage.vue'
@@ -54,6 +55,12 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes
+})
+
+router.beforeEach((to, from, next) => { 
+  store.dispatch('fetchCurrentUser')
+  next()
+  
 })
 
 export default router
