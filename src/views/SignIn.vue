@@ -59,11 +59,13 @@ export default {
 
   methods: {
     handleSubmit() {
-      const account = this.account
-      const password = this.password
+      const account = this.account.trim()
+      const password = this.password.trim()
 
       // 前端驗證
       if (!account || !password) {
+        this.account = ''
+        this.password = ''
         return Toast.fire({
           icon: 'error',
           title: '帳號或密碼不可空白'

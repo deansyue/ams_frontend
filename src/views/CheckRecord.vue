@@ -138,13 +138,15 @@ export default {
   methods: {
     // 打卡記錄-日期區間查詢
     handleSubmit() {
-      this.startDate = this.startDate.trim();
-      this.endDate = this.endDate.trim();
-      if (!this.startDate || !this.endDate) {
-        return Toast.fire({
+      const startDateArray = this.startDate.split('/');
+      const endDateArray = this.endDate.split('/');
+      for(let i = 0; i < 3; i++) {
+        if (startDateArray[i] === '' || endDateArray[i] === '') {
+          return Toast.fire({
           icon: "error",
-          title: "請輸入查詢的日期區間",
+          title: "需輸入完整日期,請重新輸入",
         });
+        }
       }
 
       // 清空checkRecordDatas
