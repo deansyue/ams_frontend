@@ -29,6 +29,10 @@ export default createStore({
         ...currentUser
       }
 
+      // 判斷role前先將註冊變為false
+      state.isAuthenticatedUser = false
+      state.isAuthenticatedAdmin = true
+
       if (currentUser.role === 1) {
         state.isAuthenticatedUser = true
       } else if (currentUser.role === 0) {

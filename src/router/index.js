@@ -9,6 +9,13 @@ import QRcodeGenerate from '../views/QRcodeGenerate.vue'
 import QRcodeReader from '../views/QRcodeReader.vue'
 import CheckRecord from '../views/CheckRecord.vue'
 
+
+const authorizeIsUser = (to, from, next) => {
+  // 判斷是否為使用者
+  if (!store.state.isAuthenticatedUser) return next('/HomePage')
+  return next()
+}
+
 const routes = [
   {
     path: '/',
@@ -18,17 +25,20 @@ const routes = [
   {
     path: '/HomePage',
     name: 'home-page',
-    component: HomePage
+    component: HomePage,
+    
   },
   {
     path: '/CheckIn',
     name: 'check-in',
-    component: CheckIn
+    component: CheckIn,
+    beforeEnter: (to, from, next) => authorizeIsUser(to, from, next)
   },
   {
     path: '/changePassword',
     name: 'change-password',
-    component: ChangePassword
+    component: ChangePassword,
+    beforeEnter: (to, from, next) => authorizeIsUser(to, from, next)
   },
   {
     path: '/QRcodeGenerate',
@@ -43,7 +53,8 @@ const routes = [
   {
     path: '/checkRecord',
     name: 'check-record',
-    component: CheckRecord
+    component: CheckRecord,
+    beforeEnter: (to, from, next) => authorizeIsUser(to, from, next)
   },
   {
     path: '/:pathMatch(.*)*',
@@ -57,9 +68,17 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => { 
-  store.dispatch('fetchCurrentUser')
-  next()
+router.beforeEach((to, from, next) => {
+  // 為不需token即可進入的頁面
+  const pathsWithoutAuthentication = ['sign-in', 'QRcode-generate', 'QRcode-reader']
+
+  // 當進入的頁面需toekn，重新獲取資訊
+  if (!pathsWithoutAuthentication.includes(to.name)) {
+    store.dispatch('fetchCurrentUser')
+    // 取得資訊後,再判斷是否有登入成功
+    if (!store.state.isAuthenticatedAdmin && !store.state.isAuthenticatedUser) return next('/')
+  } 
+  return next()
   
 })
 
