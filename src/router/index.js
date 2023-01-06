@@ -74,9 +74,14 @@ router.beforeEach((to, from, next) => {
 
   // 當進入的頁面需toekn，重新獲取資訊
   if (!pathsWithoutAuthentication.includes(to.name)) {
+    // 先判斷是否有token
+    if (localStorage.key('token') === null) return next('/')
+
     store.dispatch('fetchCurrentUser')
-    // 取得資訊後,再判斷是否有登入成功
-    if (!store.state.isAuthenticatedAdmin && !store.state.isAuthenticatedUser) return next('/')
+      .then(() => {
+        // 取得資訊後,再判斷是否有登入成功
+        if (!store.state.isAuthenticatedAdmin && !store.state.isAuthenticatedUser) return next('/')
+      })
   } 
   return next()
   
