@@ -8,13 +8,18 @@ import ChangePassword from '../views/ChangePassword.vue'
 import QRcodeGenerate from '../views/QRcodeGenerate.vue'
 import QRcodeReader from '../views/QRcodeReader.vue'
 import CheckRecord from '../views/CheckRecord.vue'
+import EditCompany from '../views/admin/EditCompany.vue'
 
 
 const authorizeIsUser = (to, from, next) => {
   // 判斷是否為使用者
-  if (!store.state.isAuthenticatedUser) return next('/HomePage')
+  if(!store.state.isAuthenticatedUser) return next('/HomePage')
   return next()
 }
+
+// const authorizeIsAdmin = (to, from, next) => {
+//   if (!store.state.isAuthenticatedAdmin) return next('/HomePage')
+// }
 
 const routes = [
   {
@@ -55,6 +60,12 @@ const routes = [
     name: 'check-record',
     component: CheckRecord,
     beforeEnter: (to, from, next) => authorizeIsUser(to, from, next)
+  },
+  {
+    path: '/admin/editCompany',
+    name: 'edit-company',
+    component: EditCompany,
+    // beforeEnter: (to, from, next) => authorizeIsAdmin(to, from, next)
   },
   {
     path: '/:pathMatch(.*)*',
