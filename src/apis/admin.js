@@ -3,7 +3,7 @@ const getToken = () => localStorage.getItem('token')
 
 export default {
   editCompanyData(name, useGps, area) {
-    return apiHelper.post('/admin/editCompany', { name, useGps, area }, { headers: { Authorization: `Bearer ${getToken()}` } })
+    return apiHelper.put('/admin/putCompany', { name, useGps, area }, { headers: { Authorization: `Bearer ${getToken()}` } })
   },
 
   getLockedUserData() {
