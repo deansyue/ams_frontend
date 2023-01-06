@@ -89,7 +89,6 @@ export default {
           confirmPassword,
         })
         .then((response) => {
-          console.log(response)
           const { data } = response;
 
           this.oldPassword = "";
@@ -102,7 +101,7 @@ export default {
           }
           // 回傳status為success時
           // 清空localStorage資料,導回登入畫面
-          localStorage.clear()
+          this.$store.commit('revokeAuthentication')
           Toast.fire({
             icon: "success",
             title: data.message,

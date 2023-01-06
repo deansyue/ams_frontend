@@ -38,6 +38,14 @@ export default createStore({
       } else if (currentUser.role === 0) {
         state.isAuthenticatedAdmin = true
       }
+    },
+
+    // 登出，清空資料
+    revokeAuthentication(state) {
+      state.currentUser = {}
+      state.isAuthenticatedAdmin = false
+      state.isAuthenticatedUser = false
+      localStorage.removeItem('token')
     }
   },
   actions: {
@@ -45,11 +53,18 @@ export default createStore({
       authorizationAPI.getCurrentUser()
         .then(response => {
           const { data } = response
-          if (data.status === 'error') console.error(data.message)
+          if (data.status === 'error') {
+            commit('revokeAuthentication')
+            console.error(data.message)
+            return false
+          }
           commit('setCurrentUser', data.data.user)
+          return true
         })
         .catch(err => {
+          commit('revokeAuthentication')
           console.error(err.message)
+          return false
         })
     }
   },

@@ -35,7 +35,7 @@ import { mapState } from "vuex"
 export default {
   methods: {
     logOut() {
-      localStorage.clear()
+      this.$store.commit('revokeAuthentication')
       Toast.fire({
         icon: "success",
         title: "登出成功"
