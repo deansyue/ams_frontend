@@ -9,6 +9,7 @@ import QRcodeGenerate from '../views/QRcodeGenerate.vue'
 import QRcodeReader from '../views/QRcodeReader.vue'
 import CheckRecord from '../views/CheckRecord.vue'
 import EditCompany from '../views/admin/EditCompany.vue'
+import unlockedUser from '../views/admin/UnlockedUser.vue'
 
 
 const authorizeIsUser = (to, from, next) => {
@@ -17,9 +18,10 @@ const authorizeIsUser = (to, from, next) => {
   return next()
 }
 
-// const authorizeIsAdmin = (to, from, next) => {
-//   if (!store.state.isAuthenticatedAdmin) return next('/HomePage')
-// }
+const authorizeIsAdmin = (to, from, next) => {
+  if (!store.state.isAuthenticatedAdmin) return next('/HomePage')
+  return next()
+}
 
 const routes = [
   {
@@ -65,7 +67,13 @@ const routes = [
     path: '/admin/editCompany',
     name: 'edit-company',
     component: EditCompany,
-    // beforeEnter: (to, from, next) => authorizeIsAdmin(to, from, next)
+    beforeEnter: (to, from, next) => authorizeIsAdmin(to, from, next)
+  },
+  {
+    path: '/admin/unlockedUser',
+    name: 'unlocked-user',
+    component: unlockedUser,
+    beforeEnter: (to, from, next) => authorizeIsAdmin(to, from, next)
   },
   {
     path: '/:pathMatch(.*)*',
