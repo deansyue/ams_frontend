@@ -26,8 +26,8 @@ const authorizeIsAdmin = (to, from, next) => {
 const routes = [
   {
     path: '/',
-    name: 'sign-in',
-    redirect: '/signin'
+    name: 'root',
+    redirect: '/SignIn'
   },
   {
     path: '/SignIn',
@@ -95,7 +95,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   // 為不需token即可進入的頁面
-  const pathsWithoutAuthentication = ['sign-in', 'QRcode-generate', 'QRcode-reader']
+  const pathsWithoutAuthentication = ['root', 'sign-in', 'QRcode-generate', 'QRcode-reader']
 
   // 當進入的頁面需toekn，重新獲取資訊
   if (!pathsWithoutAuthentication.includes(to.name)) {
