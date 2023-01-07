@@ -92,16 +92,14 @@ export default {
              icon: "success",
              title: data.message,
            });
-           // 重新整理該頁面
-           this.$router.push('/admin/EditCompany')
+           // 成功後,跳回首頁
+           this.$router.push('/HomePage')
          })
          .catch((error) => {
            Toast.fire({
              icon: "error",
             title: error.message,
            });
-           // 重新整理該頁面
-           this.$router.push('/admin/EditCompany')
          });
     },
   },
