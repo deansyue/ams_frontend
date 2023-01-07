@@ -27,7 +27,13 @@ const routes = [
   {
     path: '/',
     name: 'sign-in',
+    redirect: '/signin'
+  },
+  {
+    path: '/SignIn',
+    name: 'sign-in',
     component: SignIn
+
   },
   {
     path: '/HomePage',
@@ -42,7 +48,7 @@ const routes = [
     beforeEnter: (to, from, next) => authorizeIsUser(to, from, next)
   },
   {
-    path: '/changePassword',
+    path: '/ChangePassword',
     name: 'change-password',
     component: ChangePassword,
     beforeEnter: (to, from, next) => authorizeIsUser(to, from, next)
@@ -58,19 +64,19 @@ const routes = [
     component: QRcodeReader
   },
   {
-    path: '/checkRecord',
+    path: '/CheckRecord',
     name: 'check-record',
     component: CheckRecord,
     beforeEnter: (to, from, next) => authorizeIsUser(to, from, next)
   },
   {
-    path: '/admin/editCompany',
+    path: '/admin/EditCompany',
     name: 'edit-company',
     component: EditCompany,
     beforeEnter: (to, from, next) => authorizeIsAdmin(to, from, next)
   },
   {
-    path: '/admin/unlockedUser',
+    path: '/admin/UnlockedUser',
     name: 'unlocked-user',
     component: unlockedUser,
     beforeEnter: (to, from, next) => authorizeIsAdmin(to, from, next)
@@ -94,12 +100,12 @@ router.beforeEach((to, from, next) => {
   // 當進入的頁面需toekn，重新獲取資訊
   if (!pathsWithoutAuthentication.includes(to.name)) {
     // 先判斷是否有token
-    if (localStorage.key('token') === null) return next('/')
+    if (localStorage.key('token') === null) return next('/SignIn')
 
     store.dispatch('fetchCurrentUser')
       .then(() => {
         // 取得資訊後,再判斷是否有登入成功
-        if (!store.state.isAuthenticatedAdmin && !store.state.isAuthenticatedUser) return next('/')
+        if (!store.state.isAuthenticatedAdmin && !store.state.isAuthenticatedUser) return next('/SignIn')
       })
   } 
   return next()

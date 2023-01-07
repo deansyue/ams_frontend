@@ -106,7 +106,7 @@ export default {
             icon: "success",
             title: data.message,
           });
-          this.$router.push('/')
+          this.$router.push('/SignIn')
         })
         .catch((error) => {
           Toast.fire({

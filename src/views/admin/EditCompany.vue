@@ -93,7 +93,7 @@ export default {
              title: data.message,
            });
            // 重新整理該頁面
-           this.$router.push('/admin/editCompany')
+           this.$router.push('/admin/EditCompany')
          })
          .catch((error) => {
            Toast.fire({
@@ -101,7 +101,7 @@ export default {
             title: error.message,
            });
            // 重新整理該頁面
-           this.$router.push('/admin/editCompany')
+           this.$router.push('/admin/EditCompany')
          });
     },
   },

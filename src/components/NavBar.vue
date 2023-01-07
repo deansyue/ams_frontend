@@ -13,19 +13,19 @@
 
       <div class="d-flex" v-if="currentUser.role === 1">
         <li class="nav-item">
-        <router-link class="mr-2 nav-link" :to="'/checkIn'">上下班打卡</router-link>
+        <router-link class="mr-2 nav-link" :to="'/CheckIn'">上下班打卡</router-link>
       </li>
       <li class="nav-item dropdown">
-        <router-link class="mr-2 nav-link" :to="'/checkRecord'">打卡記錄表</router-link>
+        <router-link class="mr-2 nav-link" :to="'/CheckRecord'">打卡記錄表</router-link>
       </li>
       </div>
       
       <div class="d-flex" v-if="currentUser.role === 0">
         <li class="nav-item dropdown">
-        <router-link class="mr-2 nav-link" :to="'/admin/editCompany'">修改公司資料</router-link>
+        <router-link class="mr-2 nav-link" :to="'/admin/EditCompany'">修改公司資料</router-link>
       </li>
        <li class="nav-item dropdown">
-        <router-link class="mr-2 nav-link" :to="'/admin/unlockedUser'">解鎖員工帳號</router-link>
+        <router-link class="mr-2 nav-link" :to="'/admin/UnlockedUser'">解鎖員工帳號</router-link>
       </li>
       </div>
       
@@ -35,7 +35,7 @@
       <span class="mr-sm-2">帳號：{{currentUser.account}}</span>
       <span class="mr-sm-2">使用者：{{currentUser.name}}</span>
       <div class="d-flex" v-if="currentUser.role === 1">
-        <router-link class="mr-sm-2 text-muted" :to="'/changePassword'">修改密碼</router-link>
+        <router-link class="mr-sm-2 text-muted" :to="'/ChangePassword'">修改密碼</router-link>
       </div>
       <button class="mr-sm-2 text-muted" @click="logOut()">登出</button>
     </div>
@@ -55,7 +55,7 @@ export default {
         icon: "success",
         title: "登出成功"
       })
-      this.$router.push('/')
+      this.$router.push('/SignIn')
     }
   },
 

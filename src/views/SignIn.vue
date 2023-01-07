@@ -90,7 +90,7 @@ export default {
           this.isProcess = false
           localStorage.setItem('token', data.data.token)
           this.$store.commit('setCurrentUser', data.data.user)
-          this.$router.push('/homePage')
+          this.$router.push('/HomePage')
         })
         .catch(error => {
           this.isProcess = false

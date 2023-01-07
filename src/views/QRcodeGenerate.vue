@@ -25,7 +25,7 @@
       <router-link
         class="btn btn-primary mt-2 ml-5"
         style="width: 170px"
-        :to="'/'"
+        :to="'/SignIn'"
         >回到登入畫面</router-link
       >
     </form>
