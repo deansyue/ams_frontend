@@ -3,7 +3,7 @@
     <NavBar />
     <form class="w-100" @submit.prevent.stop="handleSubmit">
       <div class="text-center mb-4 mt-4">
-        <h1 class="h3 mb-3 font-weight-normal">change Password</h1>
+        <h1 class="h3 mb-3 font-weight-normal">修改密碼</h1>
       </div>
 
       <div class="form-label-group mb-2">

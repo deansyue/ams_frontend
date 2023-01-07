@@ -2,6 +2,7 @@
   <div class="container py-5">
     <NavBar />
 
+    <h1 class="h3 mt-5 font-weight-normal text-center">解鎖員工上鎖狀態</h1>
     <form @submit.prevent.stop="reload">
       <button type="submit" class="btn-primary mt-5">重新載入</button>
     </form>
@@ -44,7 +45,7 @@
     </div>
 
     <div class="m-5 text-center" v-else>
-      <h1>現無上鎖員工</h1>
+      <h1 class="h2">現無上鎖員工</h1>
     </div>
     
   </div>
