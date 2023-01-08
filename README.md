@@ -26,7 +26,6 @@
 * Vuex
 * Vue router
 * Axios
-* SASS
 
 ## Installing 專案安裝流程
 1. 打開您的終端機(terminal)，複製(clone)專案至本機
