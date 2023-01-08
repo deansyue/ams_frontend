@@ -27,19 +27,21 @@ const routes = [
   {
     path: '/',
     name: 'root',
-    redirect: '/SignIn'
+    component: HomePage
   },
   {
     path: '/SignIn',
     name: 'sign-in',
-    component: SignIn
-
+    component: SignIn,
+    beforeEnter: (to, from, next) => {
+      if (store.state.isAuthenticatedUser || store.state.isAuthenticatedAdmin) return next('/HomePage')
+      return next()
+    }
   },
   {
     path: '/HomePage',
     name: 'home-page',
-    component: HomePage,
-    
+    component: HomePage
   },
   {
     path: '/CheckIn',
@@ -95,7 +97,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   // 為不需token即可進入的頁面
-  const pathsWithoutAuthentication = ['root', 'sign-in', 'QRcode-generate', 'QRcode-reader']
+  const pathsWithoutAuthentication = ['sign-in', 'QRcode-generate', 'QRcode-reader']
 
   // 當進入的頁面需toekn，重新獲取資訊
   if (!pathsWithoutAuthentication.includes(to.name)) {
