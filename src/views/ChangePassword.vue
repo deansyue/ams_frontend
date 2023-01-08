@@ -1,6 +1,6 @@
 <template>
-    <NavBar />
-    <div class="container py-5">
+  <NavBar />
+  <div class="container py-5">
     <form class="w-50 m-auto" @submit.prevent.stop="handleSubmit">
       <div class="text-center mb-4 mt-4">
         <h1 class="h3 mb-3 font-weight-normal">修改密碼</h1>
@@ -101,12 +101,12 @@ export default {
           }
           // 回傳status為success時
           // 清空localStorage資料,導回登入畫面
-          this.$store.commit('revokeAuthentication')
+          this.$store.commit("revokeAuthentication");
           Toast.fire({
             icon: "success",
             title: data.message,
           });
-          this.$router.push('/SignIn')
+          this.$router.push("/SignIn");
         })
         .catch((error) => {
           Toast.fire({

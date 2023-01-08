@@ -1,7 +1,10 @@
 <template>
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-  <h1 class="h3 mb-3 font-weight-normal">出勤管理系統</h1>
-</nav>
+  <nav
+    class="navbar navbar-expand-lg navbar-light"
+    style="background-color: #e3f2fd"
+  >
+    <h1 class="h3 mb-3 font-weight-normal">出勤管理系統</h1>
+  </nav>
   <div class="container py-5">
     <form class="w-50 m-auto" @submit.prevent.stop="handleSubmit">
       <div class="text-center mb-4">
@@ -35,11 +38,15 @@
         />
       </div>
 
-      <button class="btn btn-lg btn-primary btn-block mb-2 w-50 m-auto" type="submit">
+      <button
+        class="btn btn-lg btn-primary btn-block mb-2 w-50 m-auto"
+        type="submit"
+      >
         登入
       </button>
       <router-link
-        class="btn-block mt-4 mr-auto ml-auto w-50 pl-4" style="font-size: 22px;"
+        class="btn-block mt-4 mr-auto ml-auto w-50 pl-4"
+        style="font-size: 22px"
         :to="'/QRcodeGenerate'"
         >產生打卡用二維條碼</router-link
       >
@@ -49,28 +56,28 @@
 
 <script>
 import authorizationAPI from "../apis/authorization";
-import { Toast } from '../utils/helper'
+import { Toast } from "../utils/helper";
 export default {
   data() {
     return {
       account: "",
-      password: ""
+      password: "",
     };
   },
 
   methods: {
     handleSubmit() {
-      const account = this.account.trim()
-      const password = this.password.trim()
+      const account = this.account.trim();
+      const password = this.password.trim();
 
       // 前端驗證
       if (!account || !password) {
-        this.account = ''
-        this.password = ''
+        this.account = "";
+        this.password = "";
         return Toast.fire({
-          icon: 'error',
-          title: '帳號或密碼不可空白'
-        })
+          icon: "error",
+          title: "帳號或密碼不可空白",
+        });
       }
 
       // 前端驗證通過時
@@ -80,24 +87,24 @@ export default {
           password,
         })
         .then((response) => {
-          const { data } = response
+          const { data } = response;
 
           // 回傳status為error時
-          if (data.status === 'error') {
-            throw new Error(data.message)
+          if (data.status === "error") {
+            throw new Error(data.message);
           }
           // 回傳status為success時
-          localStorage.setItem('token', data.data.token)
-          this.$store.commit('setCurrentUser', data.data.user)
-          this.$router.push('/HomePage')
+          localStorage.setItem("token", data.data.token);
+          this.$store.commit("setCurrentUser", data.data.user);
+          this.$router.push("/HomePage");
         })
-        .catch(error => {
-          this.password = ''
+        .catch((error) => {
+          this.password = "";
           Toast.fire({
-            icon: 'error',
-            title: error.message
-          })
-        })
+            icon: "error",
+            title: error.message,
+          });
+        });
     },
   },
 };

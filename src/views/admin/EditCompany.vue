@@ -1,7 +1,7 @@
 <template>
-      <NavBar />
-      
-    <div class="container py-5">
+  <NavBar />
+
+  <div class="container py-5">
     <form class="w-50 m-auto" @submit.prevent.stop="handleSubmit">
       <div class="text-center mb-4 mt-4">
         <h1 class="h3 mb-3 font-weight-normal">修改公司資料</h1>
@@ -23,8 +23,8 @@
       <div class="form-label-group mb-3">
         <label id="useGps" class="mr-2 mt-3">使用Gps驗證</label>
         <select name="useGps" v-model="useGps" required>
-          <option value= "false">不使用Gps驗證</option>
-          <option value= "true">使用Gps驗證</option>
+          <option value="false">不使用Gps驗證</option>
+          <option value="true">使用Gps驗證</option>
         </select>
       </div>
 
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex"
+import { mapState } from "vuex";
 import NavBar from "../../components/NavBar.vue";
 import adminAPI from "../../apis/admin";
 import { Toast } from "../../utils/helper";
@@ -65,56 +65,56 @@ export default {
 
   methods: {
     handleSubmit() {
-      const name = this.name.trim()
-      const useGps = this.useGps
-      const area = this.area.trim()
-      
+      const name = this.name.trim();
+      const useGps = this.useGps;
+      const area = this.area.trim();
+
       // 判斷欄位輸入的正確性
-      if (!name || !area || ( useGps !== 'true' && useGps !== 'false')) {
+      if (!name || !area || (useGps !== "true" && useGps !== "false")) {
         return Toast.fire({
-          icon: 'error',
-          title: '有欄位填寫錯誤,請重新填寫!'
-        })
+          icon: "error",
+          title: "有欄位填寫錯誤,請重新填寫!",
+        });
       }
 
       // 呼叫後端api
       return adminAPI
         .editCompanyData(name, useGps, area)
-         .then((response) => {
-           const { data } = response;
+        .then((response) => {
+          const { data } = response;
 
-           // 回傳status為error時
-           if (data.status === "error") {
-             throw new Error(data.message);
-           }
+          // 回傳status為error時
+          if (data.status === "error") {
+            throw new Error(data.message);
+          }
 
-           // 回傳status為success時
-           Toast.fire({
-             icon: "success",
-             title: data.message,
-           });
-           // 成功後,跳回首頁
-           this.$router.push('/HomePage')
-         })
-         .catch((error) => {
-           Toast.fire({
-             icon: "error",
+          // 回傳status為success時
+          Toast.fire({
+            icon: "success",
+            title: data.message,
+          });
+          // 成功後,跳回首頁
+          this.$router.push("/HomePage");
+        })
+        .catch((error) => {
+          Toast.fire({
+            icon: "error",
             title: error.message,
-           });
-         });
+          });
+        });
     },
   },
 
   computed: {
-    ...mapState(['currentUser', 'isAuthenticatedUser'])
+    ...mapState(["currentUser", "isAuthenticatedUser"]),
   },
 
   created() {
-    const company = this.currentUser.Company
-    this.name = company.name
-    this.useGps = String(company.useGps)
-    this.area = company.area
-  }
+    const company = this.currentUser.Company;
+    this.name = company.name;
+    this.useGps = String(company.useGps);
+    this.area = company.area;
+  },
 };
 </script>
 

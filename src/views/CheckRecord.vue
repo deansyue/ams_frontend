@@ -1,7 +1,7 @@
 <template>
-  <div class="container-fluid">
-    <NavBar />
+  <NavBar />
 
+  <div class="container-fluid">
     <form class="mt-5" @submit.prevent.stop="handleSubmit">
       <div class="row">
         <div class="col">
@@ -114,7 +114,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex"
+import { mapState } from "vuex";
 import NavBar from "../components/NavBar.vue";
 import checkRecordAPI from "../apis/checkRecord";
 import { Toast } from "../utils/helper";
@@ -138,14 +138,14 @@ export default {
   methods: {
     // 打卡記錄-日期區間查詢
     handleSubmit() {
-      const startDateArray = this.startDate.split('/');
-      const endDateArray = this.endDate.split('/');
-      for(let i = 0; i < 3; i++) {
-        if (startDateArray[i] === '' || endDateArray[i] === '') {
+      const startDateArray = this.startDate.split("/");
+      const endDateArray = this.endDate.split("/");
+      for (let i = 0; i < 3; i++) {
+        if (startDateArray[i] === "" || endDateArray[i] === "") {
           return Toast.fire({
-          icon: "error",
-          title: "需輸入完整日期,請重新輸入",
-        });
+            icon: "error",
+            title: "需輸入完整日期,請重新輸入",
+          });
         }
       }
 
@@ -184,15 +184,13 @@ export default {
   },
 
   computed: {
-    ...mapState(['currentUser', 'isAuthenticatedUser'])
+    ...mapState(["currentUser", "isAuthenticatedUser"]),
   },
 
   // 取vuex的company的資料進行數值初始化
   created() {
     this.useGps = this.currentUser.Company.useGps || false;
-    this.timeZone =
-      this.currentUser.Company.area ||
-      "Asia/Taipei";
+    this.timeZone = this.currentUser.Company.area || "Asia/Taipei";
 
     const timeZone = this.timeZone;
     const currentDate = this.$moment().tz(this.timeZone);

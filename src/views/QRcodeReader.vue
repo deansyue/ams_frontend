@@ -18,26 +18,26 @@ function onDecode(decodedString) {
 async function onInit(promise) {
   try {
     const { capabilities } = await promise;
-    console.log(capabilities)
+    console.log(capabilities);
     // successfully initialized
   } catch (error) {
     if (error.name === "NotAllowedError") {
       text.value = "Denied! No permission";
       // user denied camera access permisson
     } else if (error.name === "NotFoundError") {
-      text.value = "NotFoundError"
+      text.value = "NotFoundError";
       // no suitable camera device installed
     } else if (error.name === "NotSupportedError") {
-      text.value = "NotSupportedError"
+      text.value = "NotSupportedError";
       // page is not served over HTTPS (or localhost)
     } else if (error.name === "NotReadableError") {
-      text.value = "NotReadableError"
+      text.value = "NotReadableError";
       // maybe camera is already in use
     } else if (error.name === "OverconstrainedError") {
-      text.value = "OverconstrainedError"
+      text.value = "OverconstrainedError";
       // did you requested the front camera although there is none?
     } else if (error.name === "StreamApiNotSupportedError") {
-      text.value = "StreamApiNotSupportedError"
+      text.value = "StreamApiNotSupportedError";
       // browser seems to be lacking features
     }
   } finally {
