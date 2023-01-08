@@ -86,6 +86,7 @@ export default {
 
       // 判斷當前瀏覽器是否支援geolocation
       if (!navigator.geolocation) {
+        this.value = ''
         return Toast.fire({
           icon: "error",
           title: "此功能需使用定位功能,但此瀏覽器不支援定位功能!!!",
@@ -124,6 +125,7 @@ export default {
                   1
                 ) > 100
               ) {
+                this.value = ''
                 return Toast.fire({
                   icon: "error",
                   title: "此功能需在公司才能使用,請確認位置後再重新執行!",
@@ -145,6 +147,7 @@ export default {
               });
             })
             .catch((error) => {
+              this.value = ''
               return Toast.fire({
                 icon: "error",
                 title: error,
@@ -152,6 +155,7 @@ export default {
             });
         })
         .catch((error) => {
+          this.value = ''
           return Toast.fire({
             icon: "error",
             title: error,
