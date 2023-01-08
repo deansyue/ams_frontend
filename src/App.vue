@@ -11,3 +11,10 @@ export default {
   name: "App",
 };
 </script>
+
+<style>
+html,body,#app{
+  height: 100%;
+  background-color: rgba(129, 216, 208,0.3);
+}
+</style>

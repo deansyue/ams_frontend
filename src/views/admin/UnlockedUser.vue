@@ -1,9 +1,9 @@
 <template>
-  <div class="container py-5">
     <NavBar />
 
+  <div class="container py-5">
     <h1 class="h3 mt-5 font-weight-normal text-center">解鎖員工上鎖狀態</h1>
-    <form @submit.prevent.stop="reload">
+    <form class="text-center" @submit.prevent.stop="reload">
       <button type="submit" class="btn-primary mt-5">重新載入</button>
     </form>
     
@@ -40,7 +40,9 @@
         </tbody>
       </table>
 
+      <div class="text-right">
       <button type="submit" class="btn-primary mt-2">送出</button>
+      </div>
     </form>
     </div>
 

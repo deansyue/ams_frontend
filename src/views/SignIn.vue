@@ -1,8 +1,10 @@
 <template>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+  <h1 class="h3 mb-3 font-weight-normal">出勤管理系統</h1>
+</nav>
   <div class="container py-5">
     <form class="w-50 m-auto" @submit.prevent.stop="handleSubmit">
       <div class="text-center mb-4">
-        <h1 class="h3 mb-3 font-weight-normal">出勤管理系統</h1>
         <h1 class="h3 mb-3 font-weight-normal">Sign In</h1>
       </div>
 
@@ -52,8 +54,7 @@ export default {
   data() {
     return {
       account: "",
-      password: "",
-      isProcess: false
+      password: ""
     };
   },
 
@@ -73,7 +74,6 @@ export default {
       }
 
       // 前端驗證通過時
-      this.isProcess = true
       authorizationAPI
         .signIn({
           account,
@@ -87,13 +87,11 @@ export default {
             throw new Error(data.message)
           }
           // 回傳status為success時
-          this.isProcess = false
           localStorage.setItem('token', data.data.token)
           this.$store.commit('setCurrentUser', data.data.user)
           this.$router.push('/HomePage')
         })
         .catch(error => {
-          this.isProcess = false
           this.password = ''
           Toast.fire({
             icon: 'error',

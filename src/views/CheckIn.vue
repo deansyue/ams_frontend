@@ -1,6 +1,7 @@
 <template>
-  <div class="container py-5">
-    <NavBar />
+     <NavBar />
+     
+    <div class="container py-5">
     <div class="mt-5">
       <form @submit.prevent.stop="handleSubmit">
       <h1 class="text-center">上下班打卡</h1>
